@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+ 
+    // Tabs
 
     const tabs = document.querySelectorAll(".tabheader__item"),
           tabsContent = document.querySelectorAll(".tabcontent"),
@@ -89,5 +91,39 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     setClock('.timer', deadline);
+
+    // Modal
+
+    const modalTriggerBtn = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal'),
+          modalCloseBtn = document.querySelector('[data-close]');
+
+    function closeModal() {
+        modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    }
+
+    modalTriggerBtn.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            // modal.classList.add('show');
+            // modal.classList.remove('hide');
+            modal.classList.toggle('show');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal){
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
           
 });
